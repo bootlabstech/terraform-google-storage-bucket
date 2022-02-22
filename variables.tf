@@ -5,13 +5,59 @@ variable "name" {
 }
 
 variable "force_destroy" {
-  description = "option to delete all objects in a bucket while deleting a bucket"
+  description = <<-EOT
+  {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data": [
+  "true",
+  "false"
+   ],
+    "description": "When set to true, enables forced deletion of contained objects."
+   }
+   EOT
   type        = bool
   default     = false
 }
 
 variable "location" {
-  description = "the location of the bucket"
+  description = <<-EOT
+    {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data":[ "asia-east1",
+        "asia-east2",
+        "asia-northeast1",
+        "asia-northeast2",
+        "asia-northeast3",
+        "asia-south1",
+        "asia-south2",
+        "asia-southeast1",
+        "asia-southeast2",
+        "australia-southeast1",
+        "australia-southeast2",
+        "europe-central2",
+        "europe-north1",
+        "europe-west1",
+        "europe-west2",
+        "europe-west3",
+        "europe-west4",
+        "europe-west6",
+        "northamerica-northeast1",
+        "northamerica-northeast2",
+        "southamerica-east1",
+        "southamerica-west1",
+        "us-central1",
+        "us-east1",
+        "us-east4",
+        "us-west1",
+        "us-west2",
+        "us-west3",
+        "us-west4"
+    ],
+   "description": "the location of the bucket"
+}
+  EOT
   type        = string
 }
 
@@ -21,7 +67,20 @@ variable "project_id" {
 }
 
 variable "storage_class" {
-  description = "the Storage Class of the new bucket"
+  description = <<-EOT
+    {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data":[ "STANDARD",
+            "MULTI-REGIONAL",
+            "REGIONAL",
+            "NEARLINE",
+            "COLDLINE",
+            "ARCHIVE"
+        ],
+   "description": "determines the type of storage of the bucket."
+}
+  EOT
   type        = string
   default     = null
 }
@@ -33,7 +92,18 @@ variable "labels" {
 }
 
 variable "uniform_bucket_level_access" {
-  description = "enables uniform bucket level access to a bucket"
+  description = <<-EOT
+  {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data": [
+      "true",
+      "false"
+   ],
+   "default" : true,
+   "description": "enables uniform bucket level access to a bucket"
+   }
+   EOT
   type        = bool
   default     = true
 }
@@ -48,7 +118,18 @@ variable "lifecycle_rule" {
 }
 
 variable "bucket_object_versioning" {
-  description = "enabling versioning can help retain a noncurrent object version"
+  description = <<-EOT
+  {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data": [
+      "true",
+      "false"
+   ],
+   "default" : true,
+   "description": "enabling versioning can help retain a noncurrent object version"
+   }
+   EOT
   type        = bool
   default     = true
 }
