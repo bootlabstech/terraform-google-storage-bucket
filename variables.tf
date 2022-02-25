@@ -87,3 +87,7 @@ variable "encryption" {
   })
   default = null
 }
+variable "tags" {
+  type        = list(string)
+  description = "this will be used for tagging resources."
+}
