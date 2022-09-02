@@ -7,7 +7,7 @@ resource "google_storage_bucket" "bucket" {
   storage_class               = var.storage_class
   labels                      = var.labels
   uniform_bucket_level_access = var.uniform_bucket_level_access
-   lifecycle {
+  lifecycle {
     ignore_changes = [
       labels
     ]
