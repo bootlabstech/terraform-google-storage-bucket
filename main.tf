@@ -7,7 +7,11 @@ resource "google_storage_bucket" "bucket" {
   storage_class               = var.storage_class
   labels                      = var.labels
   uniform_bucket_level_access = var.uniform_bucket_level_access
-
+   lifecycle {
+    ignore_changes = [
+      labels
+    ]
+  }
   dynamic "lifecycle_rule" {
     for_each = var.lifecycle_rule
     content {
@@ -64,3 +68,4 @@ resource "google_storage_bucket" "bucket" {
     }
   }
 }
+
