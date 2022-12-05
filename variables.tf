@@ -1,8 +1,12 @@
 ##### Variables for GCS bucket #####
-variable "name" {
-  description = "the name of the new bucket that will be created"
-  type        = string
+variable "no_of_buckets" {
+  description = "the number of the new buckets that will be created"
+  type        = number
 }
+variable "name_of_buckets" {
+  type = list(string)
+}
+
 
 variable "force_destroy" {
   description = "option to delete all objects in a bucket while deleting a bucket"
