@@ -1,11 +1,10 @@
 ##### Terraform Resource Block To Create a GCS Bucket #####
 resource "random_string" "bucket_suffix" {
-  length           = 4  # Adjust the length of the suffix as needed
+  length           = 3  # Adjust the length of the suffix as needed
   special          = false
   upper            = false
   number           = true
   min_lower        = 1
-  min_upper        = 1
   min_numeric      = 1
 }
 resource "google_storage_bucket" "bucket" {
