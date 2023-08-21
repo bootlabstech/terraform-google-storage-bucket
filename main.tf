@@ -1,7 +1,16 @@
 ##### Terraform Resource Block To Create a GCS Bucket #####
+resource "random_string" "bucket_suffix" {
+  length           = 4  # Adjust the length of the suffix as needed
+  special          = false
+  upper            = false
+  number           = true
+  min_lower        = 1
+  min_upper        = 1
+  min_numeric      = 1
+}
 resource "google_storage_bucket" "bucket" {
   count                       = var.no_of_buckets
-  name                        = var.name_of_buckets[count.index]
+  name                        = "${var.name_of_buckets[count.index]}-${random_string.bucket_suffix.result}"
   force_destroy               = var.force_destroy
   location                    = var.location
   project                     = var.project_id
