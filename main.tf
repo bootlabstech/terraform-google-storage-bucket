@@ -77,5 +77,16 @@ resource "google_storage_bucket" "bucket" {
     }
   }
 }
+ data "google_project" "service_project4" {
+  project_id = var.project_id
+}
+resource "google_project_iam_binding" "network_binding5" {
+  count   = 1
+  project = var.project_id
+  role    = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  members = [
+    "serviceAccount:service-${data.google_project.service_project.number}@gs-project-accounts.iam.gserviceaccount.com",
+  ]
+}
 
 
