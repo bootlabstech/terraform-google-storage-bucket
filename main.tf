@@ -76,6 +76,7 @@ resource "google_storage_bucket" "bucket" {
       default_kms_key_name = var.encryption.kms_key_name
     }
   }
+   depends_on = [ google_project_iam_binding.network_binding5 ]
 }
  data "google_project" "service_project4" {
   project_id = var.project_id
