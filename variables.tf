@@ -9,14 +9,31 @@ variable "name_of_buckets" {
 
 
 variable "force_destroy" {
-  description = "option to delete all objects in a bucket while deleting a bucket"
+  description = <<-EOT
+  {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data": [
+  "true",
+  "false"
+   ],
+    "description": "When set to true, enables forced deletion of contained objects."
+   }
+   EOT
   type        = bool
   default     = false
 }
 
 variable "location" {
-  description = "the location of the bucket"
-  type        = string
+  description = <<-EOT
+  {
+   "type": "api",
+   "purpose": "autocomplete",
+   "data": "/api/v1/autocomplete/regions",
+   "description": "regions for the GCS"
+}
+EOT
+type        = string
 }
 
 variable "project_id" {
@@ -25,7 +42,20 @@ variable "project_id" {
 }
 
 variable "storage_class" {
-  description = "the Storage Class of the new bucket"
+  description = <<-EOT
+    {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data":[ "STANDARD",
+            "MULTI-REGIONAL",
+            "REGIONAL",
+            "NEARLINE",
+            "COLDLINE",
+            "ARCHIVE"
+        ],
+   "description": "determines the type of storage of the bucket."
+}
+  EOT
   type        = string
   default     = null
 }
@@ -37,7 +67,18 @@ variable "labels" {
 }
 
 variable "uniform_bucket_level_access" {
-  description = "enables uniform bucket level access to a bucket"
+  description = <<-EOT
+  {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data": [
+      "true",
+      "false"
+   ],
+   "default" : true,
+   "description": "enables uniform bucket level access to a bucket"
+   }
+   EOT
   type        = bool
   default     = true
 }
@@ -52,7 +93,18 @@ variable "lifecycle_rule" {
 }
 
 variable "bucket_object_versioning" {
-  description = "enabling versioning can help retain a noncurrent object version"
+  description = <<-EOT
+  {
+   "type": "json",
+   "purpose": "autocomplete",
+   "data": [
+      "true",
+      "false"
+   ],
+   "default" : true,
+   "description": "enabling versioning can help retain a noncurrent object version"
+   }
+   EOT
   type        = bool
   default     = true
 }
