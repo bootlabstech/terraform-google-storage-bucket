@@ -92,7 +92,7 @@ resource "google_project_iam_binding" "network_binding5" {
   depends_on = [ google_storage_bucket.auto-expire ]
 }
 resource "google_storage_bucket" "auto-expire" {
-  name          = "auto-expiring-bucket"
+  name          = "auto-expiring-bucket${var.random_string.bucket_suffix.result}}"
   location      = var.location
   force_destroy = true
 
