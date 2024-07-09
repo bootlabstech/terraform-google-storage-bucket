@@ -89,7 +89,21 @@ resource "google_project_iam_binding" "network_binding5" {
     "serviceAccount:service-${data.google_project.service_project4.number}@gs-project-accounts.iam.gserviceaccount.com",
   
   ]
-  depends_on = [ google_storage_bucket.bucket ]
+  depends_on = [ google_storage_bucket.auto-expire ]
+}
+resource "google_storage_bucket" "auto-expire" {
+  name          = "auto-expiring-bucket"
+  location      = var.location
+  force_destroy = true
+
+  lifecycle_rule {
+    condition {
+      age = 1
+    }
+    action {
+      type = "Delete"
+    }
+  }
 }
 
 
