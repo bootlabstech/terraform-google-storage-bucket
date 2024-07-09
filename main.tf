@@ -87,7 +87,9 @@ resource "google_project_iam_binding" "network_binding5" {
   role    = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
   members = [
     "serviceAccount:service-${data.google_project.service_project4.number}@gs-project-accounts.iam.gserviceaccount.com",
+  
   ]
+  depends_on = [ google_storage_bucket.bucket ]
 }
 
 
