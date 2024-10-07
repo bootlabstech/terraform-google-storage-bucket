@@ -84,35 +84,38 @@ resource "google_storage_bucket" "bucket" {
 resource "google_project_iam_binding" "network_binding5" {
   count   = 1
   project = var.project_id
+  lifecycle {
+    ignore_changes = [ members ]
+  }
   role    = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
   members = [
     "serviceAccount:service-${data.google_project.service_project4.number}@gs-project-accounts.iam.gserviceaccount.com",
   
   ]
-  depends_on = [ google_storage_bucket.auto-expire ]
+  # depends_on = [ google_storage_bucket.auto-expire ]
 }
-resource "google_storage_bucket" "auto-expire" {
-  name          = "autoexpiringbucket${random_string.bucket_suffix.result}"
-  project = var.project_id
-  location      = var.location
-  force_destroy = true
-  uniform_bucket_level_access = true
-  lifecycle_rule {
-    condition {
-      age = 1
-    }
-    action {
-      type = "Delete"
-    }
-  }
-  lifecycle_rule {
-    condition {
-      age = 1
-    }
-    action {
-      type = "AbortIncompleteMultipartUpload"
-    }
-  }
-}
+# resource "google_storage_bucket" "auto-expire" {
+#   name          = "autoexpiringbucket${random_string.bucket_suffix.result}"
+#   project = var.project_id
+#   location      = var.location
+#   force_destroy = true
+#   uniform_bucket_level_access = true
+#   lifecycle_rule {
+#     condition {
+#       age = 1
+#     }
+#     action {
+#       type = "Delete"
+#     }
+#   }
+#   lifecycle_rule {
+#     condition {
+#       age = 1
+#     }
+#     action {
+#       type = "AbortIncompleteMultipartUpload"
+#     }
+#   }
+# }
 
 
